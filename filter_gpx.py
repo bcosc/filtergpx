@@ -3,12 +3,11 @@
 import xml.etree.ElementTree as ET
 import sys
 
-tree = ET.parse('small_test_nychalf2017.gpx')
+tree = ET.parse('test.gpx')
 root = tree.getroot()
 
-print root
-
-for child in root:
-  for kids in child:
-    for gkids in kids:
-      print gkids.attrib
+for trkpt in root.iter('{http://www.topografix.com/GPX/1/1}trkpt'):
+  lon = trkpt.attrib.get('lon')
+  lat = trkpt.attrib.get('lat')
+  time = trkpt[1].text
+  print lon, lat, time
